@@ -1,7 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
 class Category(models.Model):
     name = models.CharField(max_length=255)
     def __str__(self):
@@ -22,9 +20,8 @@ STARS = (
 
 class Review(models.Model):
     text = models.TextField()
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    stars = models.IntegerField(choices=STARS, default=1)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    stars = models.IntegerField(choices=STARS, default=1)
     def __str__(self):
         return self.text
 
